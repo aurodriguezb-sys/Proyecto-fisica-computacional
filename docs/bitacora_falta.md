@@ -149,12 +149,6 @@ Los mensajes del grupo y el historial respaldan la atribución de Python a Ferna
 - Decisiones:
 - Próximo paso y responsable:
 
-## 6. Fuentes del registro
-
-- Exportación del grupo de WhatsApp, mensajes del 1 de octubre al 12 de noviembre de 2026. Se sintetiza el contenido pertinente; no se reproducen teléfonos, correos, enlaces privados de reunión ni mensajes de voz o imágenes omitidos.
-- Historial público de [commits de `main`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commits/main/).
-- Enunciado del proyecto I del curso FS-0432 y documentación del equipo.
-
 """
 p.write_text(s,encoding='utf-8')
 print(p, p.stat().st_size, len(s.splitlines()))
