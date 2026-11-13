@@ -13,7 +13,7 @@
 |---|---|---|
 | Fernando Rodríguez Blanco | C26548 | Implementación en Python |
 | Orlando Ismael Benavides Renault | C11025 | Documentación, README, reporte y bitácora |
-| Samuel Rojas Baldi | C36852 | Configuración YAML (`.yml`) y scripts |
+| Samuel Rojas Baldi | C36852 | Configuración YAML (`.yml`), scripts y archivos de datos CSV (`.csv`) |
 | Eytan Sequeira Mora | C07458 | Implementación en C++ |
 
 Los nombres, carnés y responsabilidades se registran según la información proporcionada por el grupo. Los cuatro carnés están registrados. Las responsabilidades son asignaciones de trabajo, no certificaciones de tareas terminadas. Los commits de la cuenta `aurodriguezb-sys` documentan cambios del repositorio, pero no se ha confirmado su correspondencia con un integrante.
@@ -40,7 +40,7 @@ La reproducción independiente incluida en este paquete muestra que la temperatu
 
 ## 5. Desarrollo del proyecto y trabajo futuro
 
-La distribución de trabajo comunicada por el grupo asigna Python a Fernando, la documentación Markdown a Orlando, C++ a Eytan y YAML y scripts a Samuel. Los resultados de cada encargo se incorporarán al reporte conforme estén disponibles.
+La distribución de trabajo comunicada por el grupo asigna Python a Fernando, la documentación Markdown a Orlando, C++ a Eytan y YAML, scripts y CSV a Samuel. Los resultados de cada encargo se incorporarán al reporte conforme estén disponibles.
 
 El historial Git registra la creación del README el 31/10/2026 y la publicación de Python y gráficas el 09/11/2026 en Costa Rica. La [bitácora](bitacora_falta.md) enlaza los commits y permite añadir sesiones con evidencia. La siguiente etapa es incorporar el código C++ al repositorio, verificar su estado y si utiliza OpenMP u otra técnica de memoria compartida, comparar salidas, medir tiempos y presentar resultados. El protocolo propuesto aparece en [paralelismo](paralelismo_falta.md).
 
