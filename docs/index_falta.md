@@ -10,7 +10,7 @@
 |---|---|---|
 | Fernando Rodríguez Blanco | C26548 | Python |
 | Orlando Ismael Benavides Renault | C11025 | Markdown, README, reporte y bitácora |
-| Samuel Rojas Baldi | C36852 | YAML y scripts |
+| Samuel Rojas Baldi | C36852 | YAML, scripts y CSV |
 | Eytan Sequeira Mora | C07458 | C++ |
 
 ## Objetivo

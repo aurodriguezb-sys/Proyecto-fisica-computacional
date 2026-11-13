@@ -12,7 +12,7 @@ Este proyecto estudia la evolución de la temperatura en una placa mediante la s
 |---|---|---|
 | Fernando Rodríguez Blanco | C26548 | Implementación en Python |
 | Orlando Ismael Benavides Renault | C11025 | Documentación, README, reporte y bitácora |
-| Samuel Rojas Baldi | C36852 | Configuración YAML (`.yml`) y scripts |
+| Samuel Rojas Baldi | C36852 | Configuración YAML (`.yml`), scripts y archivos de datos CSV (`.csv`) |
 | Eytan Sequeira Mora | C07458 | Implementación en C++ |
 
 Los nombres, carnés y responsabilidades se registran según la información proporcionada por el grupo. Los cuatro carnés están registrados. Las responsabilidades son asignaciones de trabajo, no certificaciones de tareas terminadas. Los commits de la cuenta `aurodriguezb-sys` documentan cambios del repositorio, pero no se ha confirmado su correspondencia con un integrante.
