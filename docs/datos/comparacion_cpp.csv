@@ -1,0 +1,9 @@
+caso,tiempo,dif_max_abs,dif_media_abs,nodos_faltantes
+punto,0.01,4.853e-05,2.237e-05,0
+punto,1,2.049e-09,7.502e-10,0
+punto,5,2.110e-12,8.718e-13,0
+punto,15,2.110e-12,8.718e-13,0
+gradiente,0.01,7.500e+01,1.701e-01,0
+gradiente,1,7.500e+01,1.701e-01,0
+gradiente,5,7.500e+01,1.701e-01,0
+gradiente,15,7.500e+01,1.701e-01,0
