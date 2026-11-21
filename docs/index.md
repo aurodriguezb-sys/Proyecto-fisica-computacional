@@ -23,7 +23,7 @@ $$
 \right)
 $$
 
-donde \(u(x,y,t)\) representa la temperatura en cada punto de la placa y \(\kappa\) corresponde a la difusividad térmica del material.
+donde $u(x,y,t)$ representa la temperatura en cada punto de la placa y $\kappa$ corresponde a la difusividad térmica del material.
 
 Para resolver esta ecuación se utiliza el esquema FTCS, que aproxima las derivadas espaciales mediante diferencias centradas y la derivada temporal mediante una diferencia hacia adelante.
 
