@@ -132,27 +132,27 @@ Las cinco pruebas automáticas anteriores no constituyen una prueba de aprobaci�
 
 Para estudiar la convergencia se considera el cuadrado unitario, con fronteras iguales a cero, difusividad térmica \(\kappa = 1\) y condición inicial:
 
-\[
-u_0(x,y)=\sin(\pi x)\sin(\pi y).
-\]
+```math
+u_0(x,y)=\sin(\pi x)\sin(\pi y)
+```
 
 La solución analítica es:
 
-\[
-u(x,y,t)=\sin(\pi x)\sin(\pi y)e^{-2\pi^2t}.
-\]
+```math
+u(x,y,t)=\sin(\pi x)\sin(\pi y)e^{-2\pi^2t}
+```
 
 Se calcula el error máximo nodal en \(t = 0.1\), utilizando un paso temporal aproximado de:
 
-\[
-\Delta t \approx 0.2\,\Delta x^2,
-\]
+```math
+\Delta t \approx 0.2\,\Delta x^2
+```
 
 ajustado para alcanzar exactamente el tiempo final. El orden de convergencia se estima mediante:
 
-\[
-p=\log_2\left(\frac{E_M}{E_{2M}}\right),
-\]
+```math
+p=\log_2\left(\frac{E_M}{E_{2M}}\right)
+```
 
 donde \(E_M\) representa el error máximo para una malla de resolución \(M\).
 
