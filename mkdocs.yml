@@ -1,0 +1,48 @@
+site_name: "Ecuación de calor en dos dimensiones"
+site_description: "Proyecto I de Física Computacional (FS-0432, UCR): solución numérica de la ecuación de calor 2D con FTCS en Python y C++/OpenMP."
+site_author: "Fernando Rodríguez, Orlando Benavides, Samuel Rojas, Eytan Sequeira"
+repo_url: https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional
+edit_uri: ""
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: readthedocs
+  locale: es
+  highlightjs: true
+  hljs_languages:
+    - python
+    - cpp
+    - yaml
+
+nav:
+  - Inicio: index.md
+  - Integrantes y estado: equipo_falta.md
+  - Fundamento y método: explanation.md
+  - Tutorial: tutorials_falta.md
+  - Referencia de código: reference_falta.md
+  - Resultados:
+      - Resultados y validación: resultados_falta.md
+      - Datos, gráficas y CSV: resultados.md
+  - Paralelismo: paralelismo_falta.md
+  - Reporte académico: reporte_falta.md
+  - Bitácora: bitacora_falta.md
+
+# index_falta.md se conserva como borrador de Orlando; la portada del sitio es index.md.
+not_in_nav: |
+  index_falta.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      use_pygments: false
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js

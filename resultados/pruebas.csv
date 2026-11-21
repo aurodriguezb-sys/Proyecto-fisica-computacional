@@ -1,0 +1,6 @@
+prueba,error_max,tolerancia,aprobada
+escalar_vs_vectorizado_punto,0.000e+00,1e-12,si
+escalar_vs_vectorizado_gradiente,0.000e+00,1e-12,si
+campo_uniforme_constante,0.000e+00,1e-12,si
+heat_py_vs_vectorizado_punto,0.000e+00,1e-09,si
+heat_py_vs_vectorizado_gradiente,0.000e+00,1e-09,si
