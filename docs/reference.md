@@ -1,6 +1,6 @@
 # Referencia del código
 
-> **Estado: Python y C++ documentados; scripts externos pendientes.** La referencia incorpora `heat.cpp` y sus salidas CSV, pero falta validar su interfaz mediante pruebas automatizadas y añadir los scripts de Samuel.
+> **Estado al 20/11/2026:** interfaces Python, C++ y script de Samuel documentados. Están disponibles pruebas numéricas, datos comparativos y el validador; aún falta evaluar rendimiento y acordar la condición de las esquinas.
 
 Fuentes: [heat.py](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/blob/main/heat.py) y [heat.cpp](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/blob/main/heat.cpp). La incorporación de C++ corresponde al commit [`50693a1`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/50693a1ccc0b00f6b8b4b81f16bafd447de81546).
 
@@ -78,4 +78,25 @@ Cada CSV tiene cuatro bloques de 441 nodos, uno por instante, además de la fila
 
 ## Comparación y limitaciones pendientes
 
-Las dos implementaciones usan la misma fórmula FTCS y los mismos parámetros nominales. En C++ se copia la matriz completa mediante `T = Tp` en cada paso; en Python se utiliza `T[:, :] = Tp[:, :]`. Queda por implementar una comparación automatizada nodo a nodo y medir la aceleración de OpenMP. También faltan validaciones de dimensiones, del valor de `initial`, de los tiempos solicitados y de la estabilidad numérica. Los scripts mencionados en propuestas previas, como `scripts/validar_calor.py`, no figuran todavía en el repositorio principal.
+Las dos implementaciones usan la misma fórmula FTCS y los mismos parámetros nominales. En C++ se copia la matriz completa mediante `T = Tp` en cada paso; en Python se utiliza `T[:, :] = Tp[:, :]`. La comparación automatizada nodo a nodo ya fue incorporada con `scripts/validar_calor.py` en la PR #1 y documenta una diferencia localizada en la esquina `(j=20,i=0)` del caso gradiente. Permanece pendiente medir la aceleración de OpenMP. También faltan validaciones de dimensiones, del valor de `initial`, de los tiempos solicitados y de la estabilidad numérica en los programas originales.
+
+
+## Actualización de interfaces y archivos — integración del 20/11/2026
+
+El archivo [`scripts/validar_calor.py`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/blob/main/scripts/validar_calor.py) ya existe en `main`, incorporado por la [pull request #1](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/pull/1). Este apartado actualiza el estado documental de la referencia sin sustituir las especificaciones anteriores de `heat.py` y `heat.cpp`.
+
+| Función / recurso | Entrada principal | Retorno o propósito |
+|---|---|---|
+| `inicializar(M, caso, ...)` | Intervalos, tipo de escenario y parámetros térmicos | Matriz NumPy inicial `(M+1,M+1)` |
+| `verificar_estabilidad(kappa, dx, dy, dt)` | Difusividad y pasos | Suma `r_x+r_y`; lanza `ValueError` si excede `0.5` |
+| `paso_ftcs(T, rx, ry)` | Matriz y coeficientes | Matriz nueva con bordes fijos |
+| `evolucionar(T, kappa, dx, dy, dt, pasos, guardar_en=())` | Estado y parámetros temporales | Matriz final y diccionario de instantáneas |
+| `simular_escenario(caso)` | `punto` o `gradiente` | Arreglo `(21,21,4)` para el caso actual |
+| `cargar_heat_py()` | Código original `heat.py` | Función extraída por AST sin ejecutar sus gráficas |
+| `exportar_matrices(ruta, T_res)` | Ruta y arreglo de resultados | CSV con columnas `Tiempo, j, i, Temperatura` |
+| `leer_csv_cpp(ruta)` | Ruta a CSV de C++ | Arreglo `(21,21,4)` |
+| `convergencia(...)` | Mallas, tiempo y factor temporal | Filas con error máximo y orden observado |
+
+El script acepta `--original` para ejecutar las comparaciones contra `heat.py` y `--sin-figuras` para omitir la producción de imágenes. Escribe salidas en `resultados/`, replica los CSV publicados para la web en `docs/datos/` y guarda figuras en `docs/img/`. La página [`docs/resultados.md`](resultados.md) contiene el inventario y los enlaces para consultar esos recursos.
+
+**Límite de la comparación:** el archivo `comparacion_cpp.csv` registra una diferencia de 75 en una esquina del caso de gradiente; la función de pruebas del script informa pruebas Python aprobadas, pero no convierte automáticamente esta discrepancia de C++ en una prueba fallida. Las mediciones de rendimiento OpenMP siguen sin estar incluidas.

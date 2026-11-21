@@ -1,6 +1,6 @@
 # Explicación del método numérico
 
-> **Estado: fundamento FTCS documentado para Python y C++.** El código C++ incorpora OpenMP; la validación cruzada y las mediciones de rendimiento permanecen pendientes.
+> **Estado al 20/11/2026:** fundamento FTCS, implementaciones y validación numérica documentados. Se identificó una diferencia de esquina en C++; siguen pendientes las mediciones de rendimiento de OpenMP.
 
 ## 1. Modelo físico
 
@@ -45,8 +45,17 @@ El doble búfer evita modificar valores que aún se requieren en la misma iterac
 
 ## 5. Validación
 
-Una solución analítica con fronteras cero es $u(x,y,t)=\sin(\pi x)\sin(\pi y)e^{-2\pi^2\kappa t}$ sobre el cuadrado unitario. Permite cuantificar error y convergencia. Se incluye una comprobación independiente en `scripts/validar_calor.py`; consultar [resultados](resultados_falta.md). No estaba implementada en `heat.py` original.
+Una solución analítica con fronteras cero es $u(x,y,t)=\sin(\pi x)\sin(\pi y)e^{-2\pi^2\kappa t}$ sobre el cuadrado unitario. Permite cuantificar error y convergencia. Se incluye una comprobación independiente en `scripts/validar_calor.py`; consultar [resultados](resultados.md). No estaba implementada en `heat.py` original.
 
 ## 6. Implementación C++ y paralelismo
 
-El 13 de noviembre Eytan incorporó `heat.cpp`, `heat.exe` y los resultados CSV. La versión C++ utiliza matrices `std::vector<std::vector<double>>`, el mismo esquema explícito de cinco puntos y los mismos parámetros y tiempos observados en Python. Los nodos interiores se calculan con `#pragma omp parallel for collapse(2)`; otra región paralela guarda las instantáneas. El archivo `omp.h` y las directivas verifican el uso de la interfaz OpenMP en el código, pero no demuestran una mejora de tiempo sin mediciones comparativas. Los resultados y pendientes se detallan en [paralelismo](paralelismo_falta.md) y [resultados](resultados_falta.md).
+El 13 de noviembre Eytan incorporó `heat.cpp`, `heat.exe` y los resultados CSV. La versión C++ utiliza matrices `std::vector<std::vector<double>>`, el mismo esquema explícito de cinco puntos y los mismos parámetros y tiempos observados en Python. Los nodos interiores se calculan con `#pragma omp parallel for collapse(2)`; otra región paralela guarda las instantáneas. El archivo `omp.h` y las directivas verifican el uso de la interfaz OpenMP en el código, pero no demuestran una mejora de tiempo sin mediciones comparativas. Los resultados y pendientes se detallan en [paralelismo](paralelismo.md) y [resultados](resultados.md).
+
+
+## 7. Validación integrada en la pull request #1
+
+La [integración de Samuel](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/pull/1) añadió `scripts/validar_calor.py`, que reproduce el esténcil FTCS de cinco puntos usando operaciones vectorizadas con NumPy y conserva las temperaturas impuestas en los bordes. El validador comprueba la condición de estabilidad antes de la evolución: con `L=1`, `M=20`, `h=0.0001` y `kappa=1`, se obtiene `r_x=r_y=0.04` y `r_x+r_y=0.08`, por debajo del límite `0.5`.
+
+Se añadió un estudio con solución analítica `sin(pi*x)*sin(pi*y)*exp(-2*pi²*kappa*t)` y condiciones de Dirichlet homogéneas. Los errores máximos publicados para `M=10,20,40,80` son aproximadamente `3.18248e-3`, `7.90884e-4`, `1.97428e-4` y `4.93386e-5`, con orden observado cercano a 2 bajo refinamiento acoplado `dt≈0.2 dx²`. Estos resultados apoyan la consistencia del esquema para ese problema de prueba, sin convertirlo en una demostración de aislamiento térmico.
+
+**Nota sobre la comparación C++/Python:** el validador localiza una diferencia en el nodo de esquina `(j=20,i=0)` del escenario `gradiente`: Python mantiene 25 mientras C++ guarda 100 por la secuencia de asignación de fronteras. Dado que el esténcil interior utiliza vecinos axiales y no esquinas, esa diferencia de esquina no cambia el cálculo de los nodos interiores en los escenarios actuales, pero sí la salida CSV y las medias que incluyen el borde. La discrepancia debe registrarse hasta que el grupo acuerde una convención uniforme para las esquinas.

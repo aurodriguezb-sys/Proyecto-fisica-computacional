@@ -3,9 +3,9 @@
 **Proyecto:** Ecuación de calor en dos dimensiones  
 **Curso:** FS-0432 Física Computacional — Universidad de Costa Rica  
 **Profesor:** Marlon Brenes  
-**Última actualización:** 16 de noviembre de 2026 (hora de Costa Rica, UTC−6)
+**Última actualización:** 20 de noviembre de 2026 (hora de Costa Rica, UTC−6)
 
-> Documento de seguimiento en progreso. Se distinguen las actividades registradas en WhatsApp, los avances publicados en GitHub, los avances comunicados que todavía no se han verificado y las tareas pendientes. Se mantiene el sufijo `_falta` mientras no se complete el proyecto.
+> Documento de seguimiento en progreso. Se distinguen las actividades registradas en WhatsApp, los avances publicados en GitHub, los avances comunicados que todavía no se han verificado y las tareas pendientes. Los archivos de documentación adoptan nombres definitivos, mientras que los pendientes científicos se mantienen identificados.
 
 ## 1. Integrantes y distribución del trabajo
 
@@ -13,7 +13,7 @@
 |---|---|---|---|
 | Fernando Rodríguez Blanco | C26548 | Implementación en Python, simulaciones y gráficas | `heat.py` y dos gráficas publicados el 9 de noviembre. |
 | Orlando Ismael Benavides Renault | C11025 | Archivos Markdown, README, reporte y bitácora | Publicó la documentación de avance el 12 de noviembre; actualización documental tras la publicación de C++. |
-| Samuel Rojas Baldi | C36852 | Configuración YAML (`mkdocs.yml`), scripts, `mathjax.js` y apoyo en datos según los acuerdos | Archivos de configuración y scripts por incorporar. Los CSV publicados el 13 de noviembre forman parte del commit de Eytan. |
+| Samuel Rojas Baldi | C36852 | Configuración YAML (`mkdocs.yml`), scripts, `mathjax.js` y apoyo en datos según los acuerdos | La PR #1 integró `mkdocs.yml`, MathJax, el script de validación y CSV complementarios. Los CSV originales de C++ publicados el 13 de noviembre forman parte del commit de Eytan. |
 | Eytan Sequeira Mora | C07458 | Implementación en C++ | Publicó `heat.cpp`, `heat.exe`, `resultados_punto.csv` y `resultados_gradiente.csv` en el commit `50693a1` del 13 de noviembre. |
 
 La optimización mediante paralelismo de memoria compartida es un requisito del proyecto. El código `heat.cpp` incorporado por Eytan contiene directivas OpenMP para actualizar los nodos y almacenar las instantáneas. Faltan mediciones verificables de aceleración y eficiencia.
@@ -116,9 +116,9 @@ Eytan solicitó el enlace HTTPS del repositorio y Fernando lo compartió.
 - `resultados_punto.csv`: temperaturas de la placa para los cuatro tiempos de observación.
 - `resultados_gradiente.csv`: temperaturas de la placa bajo fronteras térmicas diferentes.
 
-**Revisión de datos:** en el nodo central, a los tiempos 0.01, 1, 5 y 15, el CSV de punto caliente muestra 26.5265, 25, 25 y 25; el de gradiente muestra 25.0336, 37.5, 37.5 y 37.5. Son consistentes, dentro del redondeo mostrado, con los resultados independientes previamente documentados; aún no se ha realizado una comparación integral nodo a nodo entre Python y C++.
+**Revisión de datos:** en el nodo central, a los tiempos 0.01, 1, 5 y 15, el CSV de punto caliente muestra 26.5265, 25, 25 y 25; el de gradiente muestra 25.0336, 37.5, 37.5 y 37.5. Son consistentes, dentro del redondeo mostrado, con los resultados independientes previamente documentados; la comparación integral nodo a nodo se incorporó posteriormente mediante la PR #1, documentada en las entradas del 19–20 de noviembre.
 
-**Resultado y pendientes:** C++ y las directivas OpenMP están publicados. Falta documentar una compilación reproducible, verificar resultados cruzados completos y medir tiempo, aceleración y eficiencia con diferentes números de hilos. En el repositorio revisado no figura `mkdocs.yml` ni los scripts de validación propuestos.
+**Resultado y pendientes:** C++ y las directivas OpenMP están publicados. Falta documentar una compilación reproducible, verificar resultados cruzados completos y medir tiempo, aceleración y eficiencia con diferentes números de hilos. En la fecha de esa entrega todavía no figuraban `mkdocs.yml` ni los scripts de validación; Samuel los incorporó posteriormente en la PR #1.
 
 ## 3. Historial verificable de GitHub
 
@@ -133,7 +133,7 @@ Repositorio: [Proyecto-fisica-computacional](https://github.com/aurodriguezb-sys
 | 12 nov., 19:44 | 13 nov., 01:44 | `Benavides-Renault` | [`974dc1a`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/974dc1a9704da2e56f1a5f751d550319007d263f) | Actualización de reporte y bitácora con responsabilidades. |
 | 12 nov., 19:52 | 13 nov., 01:52 | `Benavides-Renault` | [`e4f3323`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/e4f33239) | Actualización documental. |
 | 12 nov., 19:53 | 13 nov., 01:53 | `Benavides-Renault` | [`22e9e86`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/22e9e86a) | Ampliación de bitácora: reuniones y acuerdos. |
-| 12 nov., 19:55 | 13 nov., 01:55 | `Benavides-Renault` | [`ec0a24d`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/ec0a24d7) | Actualización de `bitacora_falta.md`. |
+| 12 nov., 19:55 | 13 nov., 01:55 | `Benavides-Renault` | [`ec0a24d`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/ec0a24d7) | Actualización de `bitacora.md`. |
 | 13 nov., 16:16 | 13 nov., 22:16 | `eytanyared` | [`50693a1`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/50693a1ccc0b00f6b8b4b81f16bafd447de81546) | Publicación de `heat.cpp`, `heat.exe` y dos CSV. |
 
 Los mensajes del grupo y el historial respaldan la atribución de Python a Fernando y la documentación a Orlando. Los commits indican publicación de cambios, no la duración del trabajo. La distribución inicial propuesta en cuatro commits documentales no coincide con el historial real: hasta el 12 de noviembre se registraron seis commits documentales de Orlando, incluidas correcciones posteriores.
@@ -169,3 +169,36 @@ Los mensajes del grupo y el historial respaldan la atribución de Python a Ferna
 - Exportación del grupo de WhatsApp, mensajes del 1 de octubre al 12 de noviembre de 2026. Se sintetiza el contenido pertinente; no se reproducen teléfonos, correos, enlaces privados de reunión ni mensajes de voz o imágenes omitidos.
 - Historial público de [commits de `main`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commits/main/), incluido el commit [`50693a1`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/50693a1ccc0b00f6b8b4b81f16bafd447de81546).
 - Enunciado del proyecto I del curso FS-0432 y documentación del equipo.
+
+
+## 7. Seguimiento posterior — entrega de Samuel e integración al repositorio
+
+### 19 de noviembre de 2026 — Entrega de documentación web y herramientas de validación
+
+**Evidencia:** el commit [`de7cbd0`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/de7cbd0a7235d17ab5fe96f2af6c804c1ee2c5c6), con fecha de autor del 19 de noviembre a las 18:58 en Costa Rica (20 de noviembre, 00:58 UTC), fue publicado por la cuenta `Melrojas21`, correspondiente al aporte identificado en la pull request como trabajo de Samuel Rojas Baldi. Esta atribución se refiere a la entrega de GitHub y no constituye una medición del tiempo invertido.
+
+**Elementos incorporados en la rama de trabajo:** `mkdocs.yml`, `requirements-docs.txt`, `docs/index.md`, `docs/resultados.md`, `docs/javascripts/mathjax.js`, `scripts/validar_calor.py`, imágenes en `docs/img/` y datos CSV en `resultados/` y `docs/datos/`. El script reproduce los dos escenarios FTCS, compara matrices con los CSV de C++, verifica la invariancia de un campo uniforme, compara el método escalar con el vectorizado y calcula convergencia frente a una solución analítica. Su opción `--original` permite contrastar con la función de `heat.py` sin ejecutar sus ventanas de gráficos.
+
+### 20 de noviembre de 2026 — Aprobación e integración de la pull request #1
+
+**Evidencia:** [pull request #1](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/pull/1), titulada *Agregar MkDocs, MathJax, script de validación y CSV (Samuel Rojas)*, fusionada a `main` mediante [`6f363399`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/6f3633991a747fd67dd0bcf6d6dedc773b5460db) el 20 de noviembre a las 18:13 de Costa Rica (21 de noviembre, 00:13 UTC). La fusión incorporó 30 archivos nuevos y no eliminó archivos existentes de la rama `main`.
+
+**Revisión documental posterior:** los registros publicados en `resultados/pruebas.csv` muestran cinco pruebas aprobadas: equivalencia escalar/vectorizada para cada caso, conservación de campo uniforme y comparación de `heat.py` con la versión vectorizada para ambos escenarios. En `resultados/convergencia.csv`, el orden estimado tiende a 2 al refinar la malla con `dt` proporcional a `dx²`. La comparación C++/Python registra una diferencia máxima de 75 en el escenario de gradiente por el tratamiento de la esquina `(j=20,i=0)`; fuera de ese punto, las diferencias son compatibles con el redondeo de los CSV.
+
+**Decisiones y alcance:** se conserva la redacción anterior de la bitácora como registro histórico. La integración de MkDocs y la validación automatizada cierra parte de los pendientes mencionados en entradas anteriores; no equivale a haber medido rendimiento de OpenMP. Quedan pendientes una decisión común sobre las esquinas de frontera, la ejecución documentada de `mkdocs build` en un entorno reproducible y la medición de tiempos, aceleración y eficiencia para diferentes hilos y mallas.
+
+| Fecha y hora CR | Autor GitHub | Commit | Evidencia |
+|---|---|---|---|
+| 19 nov., 18:58 | `Melrojas21` | [`de7cbd0`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/de7cbd0a7235d17ab5fe96f2af6c804c1ee2c5c6) | Entrega del sitio MkDocs, script de validación, resultados y recursos. |
+| 20 nov., 18:13 | `Benavides-Renault` (merge) | [`6f363399`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/6f3633991a747fd67dd0bcf6d6dedc773b5460db) | Integración de la pull request #1 en `main`. |
+
+
+## 8. Consolidación de documentación — 20 de noviembre de 2026
+
+**Objetivo:** establecer nombres definitivos de los Markdown y mantener una sola página de inicio y una sola de resultados, sin perder las contribuciones existentes.
+
+**Trabajo documental preparado:** se integraron las páginas de documentación de Orlando con `docs/index.md` y `docs/resultados.md` de Samuel, se actualizaron los enlaces de navegación y se mantuvo la configuración técnica original de MkDocs. Se conservó el README inicial junto con la descripción ampliada del proyecto.
+
+**Alcance verificable:** el merge `6f363399` incorporó la PR #1; la presente consolidación de nombres corresponde a una actualización documental posterior y no representa por sí misma mediciones de rendimiento ni cambios en `heat.py`, `heat.cpp`, `heat.exe` o los CSV. Su publicación en GitHub queda sujeta a que se aplique y confirme el commit correspondiente.
+
+**Pendientes académicos:** pruebas reproducibles del rendimiento de OpenMP, tratamiento consistente de una esquina en el escenario de gradiente y revisión de las condiciones de frontera frente al requisito físico de aislamiento.
