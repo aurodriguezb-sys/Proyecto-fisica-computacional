@@ -17,7 +17,7 @@ theme:
 
 nav:
   - Inicio: index.md
-  - Fundamento teórico y método: explanation.md
+  - Marco teórico y método: explanation.md
   - Resultados y validación: resultados.md
   - Tutorial de ejecución: tutorials.md
 
