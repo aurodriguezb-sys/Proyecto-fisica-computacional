@@ -28,7 +28,15 @@ markdown_extensions:
   - admonition
   - pymdownx.arithmatex:
       generic: true
-  - pymdownx.superfences
+  
+  - pymdownx.superfences:
+      custom_fences:
+        - name: math
+          class: arithmatex
+          format: !!python/object/apply:pymdownx.arithmatex.arithmatex_fenced_format
+            kwds:
+              mode: generic
+
   - pymdownx.highlight:
       use_pygments: false
 
