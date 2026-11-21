@@ -13,7 +13,7 @@ Se busca analizar la evolución temporal de la temperatura bajo distintas condic
 
 La evolución de la temperatura en la placa se describe mediante la ecuación del calor en dos dimensiones:
 
-$$
+```math
 \frac{\partial u}{\partial t}
 =
 \kappa \left(
@@ -21,7 +21,7 @@ $$
 +
 \frac{\partial^2 u}{\partial y^2}
 \right)
-$$
+```
 
 donde $u(x,y,t)$ representa la temperatura en cada punto de la placa y $\kappa$ corresponde a la difusividad térmica del material.
 
