@@ -17,31 +17,9 @@ theme:
 
 nav:
   - Inicio: index.md
-<<<<<<< HEAD
-  - Integrantes y estado: equipo.md
-  - Fundamento y método: explanation.md
-  - Tutorial: tutorials.md
-  - Referencia de código: reference.md
+  - Fundamento teórico y método: explanation.md
   - Resultados y validación: resultados.md
-  - Paralelismo: paralelismo.md
-  - Reporte académico: reporte.md
-  - Bitácora: bitacora.md
-=======
-  - Integrantes y estado: equipo_falta.md
-  - Fundamento y método: explanation.md
-  - Tutorial: tutorials_falta.md
-  - Referencia de código: reference_falta.md
-  - Resultados:
-      - Resultados y validación: resultados_falta.md
-      - Datos, gráficas y CSV: resultados.md
-  - Paralelismo: paralelismo_falta.md
-  - Reporte académico: reporte_falta.md
-  - Bitácora: bitacora_falta.md
-
-# index_falta.md se conserva como borrador de Orlando; la portada del sitio es index.md.
-not_in_nav: |
-  index_falta.md
->>>>>>> 6f3633991a747fd67dd0bcf6d6dedc773b5460db
+  - Tutorial de ejecución: tutorials.md
 
 markdown_extensions:
   - toc:
