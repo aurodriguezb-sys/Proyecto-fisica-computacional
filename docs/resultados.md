@@ -1,6 +1,10 @@
 # Datos, gráficas y CSV
 
+<<<<<<< HEAD
 Esta página reúne los archivos de datos del proyecto y las salidas del script de validación `scripts/validar_calor.py` (aporte de Samuel Rojas). Los resultados numéricos, la comparación entre implementaciones y las gráficas se documentan en esta página.
+=======
+Esta página reúne los archivos de datos del proyecto y las salidas del script de validación `scripts/validar_calor.py` (aporte de Samuel Rojas). El análisis físico detallado está en [Resultados y validación](resultados_falta.md).
+>>>>>>> 6f3633991a747fd67dd0bcf6d6dedc773b5460db
 
 ## Cómo regenerar los datos
 
@@ -101,6 +105,7 @@ Gráficas originales de `heat.py` publicadas por el grupo (escala de colores ind
 ![Punto caliente central, heat.py](img/grafica_punto_caliente_central.png)
 
 ![Gradiente, heat.py](img/grafica_gradiente.png)
+<<<<<<< HEAD
 
 ---
 
@@ -192,3 +197,5 @@ Las diferencias de punto caliente responden a la escritura redondeada del CSV de
 La [gráfica de convergencia](img/convergencia.png), el [mapa de punto caliente](img/mapa_punto.png) y el [mapa de gradiente](img/mapa_gradiente.png) se encuentran ahora en `docs/img/`. Las tablas y los archivos originales se encuentran en la carpeta `docs/datos/` del sitio.
 
 **Precaución:** el validador publica la discrepancia con C++, pero las cinco pruebas aprobadas se refieren a equivalencia escalar/vectorizada, campo uniforme y Python original; no incluyen un criterio automático de aprobación para el error C++/Python. Tampoco contienen mediciones de rendimiento de OpenMP.
+=======
+>>>>>>> 6f3633991a747fd67dd0bcf6d6dedc773b5460db

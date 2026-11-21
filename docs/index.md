@@ -31,6 +31,7 @@ con $r_x = \kappa\,\Delta t/\Delta x^2$ y $r_y = \kappa\,\Delta t/\Delta y^2$. E
 
 | Sección | Contenido |
 |---|---|
+<<<<<<< HEAD
 | [Integrantes y estado](equipo.md) | Integrantes, estado y ejecución |
 | [Método](explanation.md) | Ecuación, discretización, estabilidad |
 | [Tutorial](tutorials.md) | Reproducir los experimentos |
@@ -40,6 +41,17 @@ con $r_x = \kappa\,\Delta t/\Delta x^2$ y $r_y = \kappa\,\Delta t/\Delta y^2$. E
 | [Paralelismo](paralelismo.md) | C++/OpenMP y protocolo de medición |
 | [Reporte](reporte.md) | Síntesis académica |
 | [Bitácora](bitacora.md) | Historial Git y registro de trabajo |
+=======
+| [Integrantes y estado](equipo_falta.md) | Integrantes, estado y ejecución |
+| [Método](explanation.md) | Ecuación, discretización, estabilidad |
+| [Tutorial](tutorials_falta.md) | Reproducir los experimentos |
+| [Referencia](reference_falta.md) | Parámetros, arreglos y funcionamiento |
+| [Resultados y validación](resultados_falta.md) | Análisis físico y comprobaciones |
+| [Datos, gráficas y CSV](resultados.md) | Salidas de `scripts/validar_calor.py`, CSV descargables y figuras |
+| [Paralelismo](paralelismo_falta.md) | C++/OpenMP y protocolo de medición |
+| [Reporte](reporte_falta.md) | Síntesis académica |
+| [Bitácora](bitacora_falta.md) | Historial Git y registro de trabajo |
+>>>>>>> 6f3633991a747fd67dd0bcf6d6dedc773b5460db
 
 ## Generar este sitio
 
@@ -52,6 +64,7 @@ mkdocs build      # genera el sitio estático en site/
 ```
 
 Las fórmulas se escriben con `$...$` y `$$...$$`; la extensión `pymdownx.arithmatex` las prepara y MathJax 3 (configurado en `docs/javascripts/mathjax.js`) las dibuja en el navegador. MathJax se carga desde un CDN, por lo que se necesita conexión para ver las ecuaciones.
+<<<<<<< HEAD
 
 ---
 
@@ -102,3 +115,5 @@ La [pull request #1](https://github.com/aurodriguezb-sys/Proyecto-fisica-computa
 | Registro histórico actualizado | [Bitácora](bitacora.md) |
 
 La navegación activa de MkDocs incluye la documentación anterior de Orlando y las páginas nuevas de Samuel. Los pendientes principales son la evaluación cuantitativa de OpenMP y la decisión sobre el tratamiento de las esquinas de frontera.
+=======
+>>>>>>> 6f3633991a747fd67dd0bcf6d6dedc773b5460db
