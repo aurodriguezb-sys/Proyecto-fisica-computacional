@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def heat_ftcs_2D(Th, Tc, Tm, kappa, L, M, h, t_end,
                  initial='punto', T_hot=100.0):
 
@@ -50,13 +51,39 @@ def heat_ftcs_2D(Th, Tc, Tm, kappa, L, M, h, t_end,
 
     for n in range(1, its + 1):
 
-        for j in range(1, M):
-            for i in range(1, M):
+        if initial == 'punto':
 
-                Tp[j, i] = (T[j, i] + rx * (T[j, i+1] - 2*T[j, i] + T[j, i-1]) +
-                            ry * (T[j+1, i] - 2*T[j, i] + T[j-1, i]))
+            for j in range(M + 1):
+                for i in range(M + 1):
+
+                    # segunda derivada respecto a x
+                    if i == 0:
+                        d2x = 2 * (T[j, 1] - T[j, 0]) / dx**2
+                    elif i == M:
+                        d2x = 2 * (T[j, M-1] - T[j, M]) / dx**2
+                    else:
+                        d2x = (T[j, i+1] - 2*T[j, i] + T[j, i-1]) / dx**2
+
+                    # segunda derivada respecto a y
+                    if j == 0:
+                        d2y = 2 * (T[1, i] - T[0, i]) / dy**2
+                    elif j == M:
+                        d2y = 2 * (T[M-1, i] - T[M, i]) / dy**2
+                    else:
+                        d2y = (T[j+1, i] - 2*T[j, i] + T[j-1, i]) / dy**2
+
+                    Tp[j, i] = T[j, i] + kappa * h * (d2x + d2y)
+
+        elif initial == 'gradiente':
+
+            for j in range(1, M):
+                for i in range(1, M):
+
+                    Tp[j, i] = (T[j, i] + rx * (T[j, i+1] - 2*T[j, i] + T[j, i-1]) +
+                                ry * (T[j+1, i] - 2*T[j, i] + T[j-1, i]))
 
         T[:, :] = Tp[:, :]
+
         for k in range(len(tiempos)):
             if n == round(tiempos[k] / h):
                 T_res[:, :, k] = T
@@ -91,14 +118,17 @@ X, Y = np.meshgrid(x, y)
 T_punto = heat_ftcs_2D(Th, Tc, Tm, kappa, L, M, h, t_end,
     initial='punto')
 
+niveles_punto = np.linspace(np.min(T_punto), np.max(T_punto), 21)
+
 fig1, graf1 = plt.subplots(2, 2)
 
 for i, ax in enumerate(graf1.flat):
 
     mapa = ax.contourf(X, Y, T_punto[:, :, i],
-        levels=20, cmap='hot')
+        levels=niveles_punto, cmap='hot', extend='both')
 
-    fig1.colorbar(mapa, ax=ax, label='Temperatura')
+    fig1.colorbar(mapa, ax=ax, label='Temperatura',
+                  format='%.3f')
 
     ax.set_title(f'Punto caliente: t = {tiempos[i]}')
     ax.set_xlabel('x')
