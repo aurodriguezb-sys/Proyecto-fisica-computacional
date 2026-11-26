@@ -89,7 +89,7 @@ python scripts/validar_calor.py
 mkdocs serve
 ```
 
-La dirección habitual de vista previa es `http://127.0.0.1:8000/`; para generar el sitio estático se emplea `mkdocs build`, que produce la carpeta `site/` excluida por `.gitignore`. La portada consolidada se encuentra en `docs/index.md`; también integra la información documental previa de Orlando. Para comparar además contra la función original de Python:
+Para generar el sitio de vista previa se emplea `mkdocs build`, que produce la carpeta `site/` excluida por `.gitignore`. La portada consolidada se encuentra en `docs/index.md`; también integra la información documental previa de Orlando. Para comparar además contra la función original de Python:
 
 ```bash
 python scripts/validar_calor.py --original
