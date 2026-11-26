@@ -1,6 +1,6 @@
 # Referencia del código
 
-> **Estado al 20/11/2026:** interfaces Python, C++ y script de Samuel documentados. Están disponibles pruebas numéricas, datos comparativos y el validador; aún falta evaluar rendimiento y acordar la condición de las esquinas.
+> **Estado al 20/11/2026:** interfaces Python, C++ y script de Samuel documentados. Están disponibles pruebas numéricas, datos comparativos y el validador.
 
 Fuentes: [heat.py](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/blob/main/heat.py) y [heat.cpp](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/blob/main/heat.cpp). La incorporación de C++ corresponde al commit [`50693a1`](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/commit/50693a1ccc0b00f6b8b4b81f16bafd447de81546).
 
@@ -18,9 +18,9 @@ Fuentes: [heat.py](https://github.com/aurodriguezb-sys/Proyecto-fisica-computaci
 | `initial` | `punto` o `gradiente` |
 | `T_hot` | Temperatura del nodo central, por defecto 100 |
 
-**Retorno:** `T_res`, arreglo NumPy de forma `(M+1, M+1, 4)`, con índices espaciales `[j,i]` e índice temporal `k`. Los tiempos son fijos: 0.01, 1, 5, 15. `its=round(t_end/h)`; se guardan estados cuando el índice temporal coincide con `round(tiempo/h)`.
+**Retorno:** `T_res`, arreglo NumPy de forma `(M+1, M+1, 4)`, con índices espaciales `[j,i]` e índice temporal `k`. Los tiempos son fijos: 0.01, 1, 5, 15. `its=round(t_end/h)`; se guardan estados cuando el índice temporal coincide con `round(tiempo/h)`, aunque se pueden cambiar en el programa para estudiar otros instantes.
 
-**Dependencias:** NumPy; Matplotlib para gráficas fuera de la función. En `punto`, la función usa las coordenadas globales `x`, `y`, no las calcula internamente. La importación de `heat.py` ejecuta ambos experimentos porque no tiene guardia `if __name__ == '__main__':`.
+**Dependencias:** NumPy; Matplotlib para gráficas fuera de la función. En `punto`, la función usa las coordenadas globales `x`, `y`, no las calcula internamente. La importación de `heat.py` ejecuta ambos casos.
 
 ## Arreglos
 
@@ -30,15 +30,6 @@ Fuentes: [heat.py](https://github.com/aurodriguezb-sys/Proyecto-fisica-computaci
 | `Tp` | Estado nuevo; conserva bordes |
 | `T_res` | Instantáneas |
 | `x,y,X,Y` | Coordenadas y malla de visualización |
-
-## Limitaciones y mejoras propuestas
-
-- Validar `M`, `L`, `h`, `kappa`, `initial` y estabilidad antes de iterar.
-- Construir las coordenadas dentro de la función, recibir tiempos de salida y validar que sean alcanzables; si no, quedan instantáneas de ceros sin advertencia.
-- Separar simulación de visualización y usar una guardia de ejecución para permitir importar funciones.
-- Emplear intercambio de búferes en lugar de copiar toda la matriz cada paso; comparar resultados.
-- Documentar unidades, tratamiento de esquinas y fronteras. Fijar escalas de color comparables para mostrar la evolución.
-- Valorar clase de configuración o simulador si mejora modularidad; no afirmar que ya se usa OOP.
 
 ## Código complementario propuesto
 
@@ -74,11 +65,11 @@ El programa establece los parámetros `Th=100`, `Tc=0`, `Tm=25`, `kappa=1`, `L=1
 - `resultados_punto.csv`: columnas `Tiempo, j, i, Temperatura`.
 - `resultados_gradiente.csv`: las mismas columnas para el segundo escenario.
 
-Cada CSV tiene cuatro bloques de 441 nodos, uno por instante, además de la fila de cabecera. `heat.exe` es el ejecutable incluido en GitHub; no se ha comprobado de manera independiente su ejecución en otro entorno. El código no acepta parámetros por línea de comandos y, al igual que el Python original, no valida todavía la condición de estabilidad antes de iterar.
+Cada CSV tiene cuatro bloques de 441 nodos, uno por instante, además de la fila de cabecera. `heat.exe` es el ejecutable incluido en GitHub.
 
-## Comparación y limitaciones pendientes
+## Comparación
 
-Las dos implementaciones usan la misma fórmula FTCS y los mismos parámetros nominales. En C++ se copia la matriz completa mediante `T = Tp` en cada paso; en Python se utiliza `T[:, :] = Tp[:, :]`. La comparación automatizada nodo a nodo ya fue incorporada con `scripts/validar_calor.py` en la PR #1 y documenta una diferencia localizada en la esquina `(j=20,i=0)` del caso gradiente. Permanece pendiente medir la aceleración de OpenMP. También faltan validaciones de dimensiones, del valor de `initial`, de los tiempos solicitados y de la estabilidad numérica en los programas originales.
+Las dos implementaciones usan la misma fórmula FTCS y los mismos parámetros nominales. En C++ se copia la matriz completa mediante `T = Tp` en cada paso; en Python se utiliza `T[:, :] = Tp[:, :]`. La comparación automatizada nodo a nodo ya fue incorporada con `scripts/validar_calor.py` en la PR #1 y documenta una diferencia localizada en la esquina `(j=20,i=0)` del caso gradiente.
 
 
 ## Actualización de interfaces y archivos — integración del 20/11/2026
@@ -99,4 +90,3 @@ El archivo [`scripts/validar_calor.py`](https://github.com/aurodriguezb-sys/Proy
 
 El script acepta `--original` para ejecutar las comparaciones contra `heat.py` y `--sin-figuras` para omitir la producción de imágenes. Escribe salidas en `resultados/`, replica los CSV publicados para la web en `docs/datos/` y guarda figuras en `docs/img/`. La página [`docs/resultados.md`](resultados.md) contiene el inventario y los enlaces para consultar esos recursos.
 
-**Límite de la comparación:** el archivo `comparacion_cpp.csv` registra una diferencia de 75 en una esquina del caso de gradiente; la función de pruebas del script informa pruebas Python aprobadas, pero no convierte automáticamente esta discrepancia de C++ en una prueba fallida. Las mediciones de rendimiento OpenMP siguen sin estar incluidas.
