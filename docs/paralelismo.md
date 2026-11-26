@@ -34,20 +34,3 @@ for (int n = 1; n <= its; ++n) {
 ```
 
 El segundo bucle paralelo de almacenamiento no se reproduce aquí; permanece en el código fuente. Con GCC y soporte OpenMP, el comando de compilación previsto es `g++ -O3 -std=c++17 -fopenmp heat.cpp -o heat` en Linux, o `-o heat.exe` en Windows. Se debe comprobar la compilación y ejecución en el equipo utilizado. Con la malla original de 21 × 21 nodos, la creación frecuente de regiones paralelas puede costar más que el trabajo realizado.
-
-## 4. Posibles optimizaciones adicionales
-
-- Almacenar las matrices en un vector contiguo indexado mediante `j*(M+1)+i` para mejorar la localidad de memoria y reducir indirecciones.
-- Evaluar el intercambio de búferes `T.swap(Tp)` en lugar de la copia `T = Tp`, manteniendo las condiciones de frontera correctas.
-- Comparar `collapse(2)` con un paralelismo por filas y `schedule(static)`; evitar que la carga de trabajo sea menor que el costo de la región paralela.
-- Evaluar una región paralela persistente que reduzca el costo de crear regiones en cada paso, respetando las barreras antes del intercambio.
-
-Estas son propuestas; no se atribuyen a la versión de Eytan ni se reportan como cambios ya aplicados.
-
-## 5. Protocolo de rendimiento
-
-Para cada malla (por ejemplo 128, 256, 512, 1024 intervalos), definir pasos y `dt` estables, fijar igual trabajo entre configuraciones, registrar CPU, núcleos, RAM, SO, compilador y flags. Probar 1, 2, 4, 8 hilos o hasta los disponibles, calentar y repetir al menos cinco veces. Reportar mediana de segundos, dispersión, $S_p=T_1/T_p$ y $E_p=S_p/p$. Comparar primero C++ con 1 hilo contra C++ con varios hilos y, por separado, contra Python. Medir preferiblemente solo el cálculo, sin operaciones de escritura de CSV, y verificar antes el error máximo frente a una referencia. La presencia de OpenMP no permite afirmar aceleración: la malla, las copias, el overhead y el ancho de banda pueden limitarla.
-
-| M | Hilos | Mediana (s) | Aceleración | Eficiencia | Error vs referencia |
-|---:|---:|---:|---:|---:|---:|
-| [M] | [p] | [medir] | [calcular] | [calcular] | [medir] |
