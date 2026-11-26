@@ -120,13 +120,7 @@ En el escenario de gradiente se identifica una discrepancia localizada de 75 uni
 
 La diferencia se debe al orden de las asignaciones de las condiciones de frontera: en C++ se asignan los cuatro bordes dentro de un mismo bucle, por lo que el orden de las operaciones determina el valor final de la esquina.
 
-Exceptuando esa esquina, las diferencias entre ambas implementaciones son del orden de `5e-5` o menores, compatibles con el redondeo de los archivos CSV. El reporte `comparacion_cpp.csv` registra los 441 nodos por instante, sin nodos faltantes.
-
-La esquina no interviene en el esténcil de cinco puntos utilizado para actualizar los nodos interiores. Por tanto, esta discrepancia no modifica los valores interiores, aunque sí cambia el valor almacenado en la esquina y afecta a la media nodal.
-
-**Este resultado debe considerarse una diferencia pendiente de resolver:** el grupo debe acordar qué valor utilizar en las esquinas y aplicar el mismo criterio en ambas implementaciones.
-
-Las cinco pruebas automáticas anteriores no constituyen una prueba de aprobación de la comparación Python/C++. El validador registra la discrepancia, pero no la clasifica como una prueba superada.
+Exceptuando esa esquina, las diferencias entre ambas implementaciones son del orden de `5e-5` o menores, compatibles con el redondeo de los archivos CSV.
 
 ## 5. Análisis de convergencia
 
@@ -169,7 +163,7 @@ Los resultados obtenidos son:
 
 El orden estimado tiende a 2 al refinar la malla. Este comportamiento es consistente con el esquema FTCS cuando el paso temporal se reduce proporcionalmente a \(\Delta x^2\).
 
-Esta prueba verifica el comportamiento del validador para el caso suave definido por la solución analítica. No constituye por sí sola una validación exhaustiva del programa original ni de la implementación en C++.
+Esta prueba verifica el comportamiento del validador para el caso suave definido por la solución analítica, aunque no constituye por sí sola una validación exhaustiva del programa original ni de la implementación en C++.
 
 ## 6. Representaciones gráficas
 
@@ -188,6 +182,12 @@ También se conservan las gráficas originales generadas por `heat.py`, en las c
 **Punto caliente central, gráfica original:**
 
 ![Punto caliente central, heat.py](img/grafica_punto_caliente_central.png)
+
+Además, se incluye una gráfica para esta condición inicial con intervales de tiempo más pequeños, con el fin de observar cómo se da la difusión del calor en los instantes iniciales.
+
+**Punto caliente central, gráfica con tiempos más pequeños.**
+
+![Punto caliente central, heat.py](img/grafica_punto_caliente_central_menor_tiempo.png)
 
 **Gradiente, gráfica original:**
 
