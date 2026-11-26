@@ -51,12 +51,3 @@ Para cada malla (por ejemplo 128, 256, 512, 1024 intervalos), definir pasos y `d
 | M | Hilos | Mediana (s) | Aceleración | Eficiencia | Error vs referencia |
 |---:|---:|---:|---:|---:|---:|
 | [M] | [p] | [medir] | [calcular] | [calcular] | [medir] |
-
-
-## 6. Alcance de la integración de noviembre de 2026
-
-La [pull request #1](https://github.com/aurodriguezb-sys/Proyecto-fisica-computacional/pull/1) agregó validación numérica y documentación web, pero **no incorporó un benchmark de OpenMP**. `resultados/pruebas.csv` mide errores de consistencia de la solución, no tiempos de ejecución. La existencia de `#pragma omp parallel for collapse(2)` en `heat.cpp` confirma una implementación de memoria compartida, no una aceleración determinada.
-
-Para medir rendimiento de manera comparable conviene compilar con las mismas opciones, fijar el número de hilos mediante `OMP_NUM_THREADS`, evitar incluir exportación CSV en el cronómetro, repetir cada caso y comparar el C++ secuencial de un hilo con C++ multihilo bajo el mismo tamaño de malla y número de pasos. Las fórmulas siguen siendo `S_p=T_1/T_p` y `E_p=S_p/p`.
-
-**Observación técnica:** la malla usada en los CSV (`M=20`, 361 nodos interiores) es pequeña para evaluar el beneficio de abrir una región paralela en cada uno de 150 000 pasos. Cualquier afirmación de aceleración debe apoyarse en tiempos efectivamente medidos y en una validación de resultados con tolerancia acordada. El archivo `resultados/comparacion_cpp.csv` permite identificar diferencias numéricas, incluida la esquina `(20,0)`, pero no aporta tiempos de CPU ni de pared.
