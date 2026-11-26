@@ -1,7 +1,6 @@
 # Tutorial de uso
 
-> **Estado al 20/11/2026:** Python, C++, MkDocs, MathJax y el script de Samuel disponibles. Falta documentar un benchmark de OpenMP en el equipo del grupo.
-
+> **Estado al 20/11/2026:** Python, C++, MkDocs, MathJax y el script de Samuel disponibles.
 ## 1. Obtener e instalar
 
 ```bash
