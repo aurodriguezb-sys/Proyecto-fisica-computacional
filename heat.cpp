@@ -76,19 +76,21 @@ std::vector<std::vector<std::vector<double>>> heat_ftcs_2D(double Th, double Tc,
         double rx = (kappa * h) / (dx * dx);
         double ry = (kappa * h) / (dy * dy);
         
-        std::vector<double> tiempos = {0.01, 1.0, 5.0, 15.0};
+        std::vector<double> tiempos = {0.01, 0.05, 0.1, 0.2};
 
         std::vector<std::vector<std::vector<double>>> T_res(size, std::vector<std::vector<double>>(size, std::vector<double>(num_tiempos, 0.0)));
 
         int its = static_cast<int>(std::round(t_end / h));
 
+        #pragma omp parallel shared(T, Tp, T_res, rx, ry, M, h, its, tiempos)
+        {
         for (int n = 1; n<= its; ++n) {
 
             double current_t = n * h;
 
             // paralelizar 
 
-            #pragma omp parallel for collapse(2) shared(T, Tp, rx, ry, M)
+            #pragma omp for collapse(2)
             for (int j = 1; j < M; ++j) {
 
                 for (int i = 1; i < M; ++i) {
@@ -99,7 +101,13 @@ std::vector<std::vector<std::vector<double>>> heat_ftcs_2D(double Th, double Tc,
 
             }
 
-            T = Tp;
+            
+            #pragma omp single
+            {
+
+                std::swap(T, Tp);
+
+            }
 
             for (size_t k = 0; k < tiempos.size(); ++k) {
 
@@ -107,12 +115,14 @@ std::vector<std::vector<std::vector<double>>> heat_ftcs_2D(double Th, double Tc,
 
                     // paralelizar
 
-                    #pragma omp parallel for collapse(2) shared(T_res, T, M, k)
+                    #pragma omp for collapse(2)
                     for (int j = 0; j <= M; ++j) {
 
                         for (int i = 0; i <= M; ++i) {
 
                             T_res[j][i][k] = T[j][i];
+
+                            }
 
                         }
 
@@ -121,8 +131,7 @@ std::vector<std::vector<std::vector<double>>> heat_ftcs_2D(double Th, double Tc,
                 }
 
             }
-
-        }
+        }     
 
         return T_res;
 
@@ -138,11 +147,14 @@ std::vector<std::vector<std::vector<double>>> heat_ftcs_2D(double Th, double Tc,
         double Tm = 25.0;
         double kappa = 1.0;
         double L = 1.0;
-        int M = 20;
-        double h = 0.0001;
-        double t_end = 15.0;
+        int M = 500;
+        double h = 0.000001;
+        double t_end = 0.2;
 
         // coordenadas
+
+        int hilos = omp_get_max_threads();
+        std::cout << "Ejecutando con " << hilos << " hilo(s)" << std::endl;
 
         std::vector<double> x(M + 1);
         std::vector<double> y(M + 1);
@@ -154,15 +166,21 @@ std::vector<std::vector<std::vector<double>>> heat_ftcs_2D(double Th, double Tc,
 
         }
 
+        double t_inicio = omp_get_wtime();
+
         std::cout << "Calculando T con condición inicial de punto caliente..." << std::endl;
         auto T_punto = heat_ftcs_2D(Th, Tc, Tm, kappa, L, M, h, t_end, "punto", x, y);
 
         std::cout << "Calculando T con condición inicial de gradiente..." << std::endl;
         auto T_gradiente = heat_ftcs_2D(Th, Tc, Tm, kappa, L, M, h, t_end, "gradiente", x, y);
 
+        double t_final = omp_get_wtime();
+        std::cout << "Tiempo total de cálculo: " << (t_final - t_inicio) << " s" <<std::endl;
+
+
         std::cout << "Simulación finalizada. Mostrando resultados." <<std::endl;
 
-        std::vector<double> tiempos = {0.01, 1.0, 5.0, 15.0};
+        std::vector<double> tiempos = {0.01, 0.05, 0.1, 0.2};
         int centro = M / 2;
 
         // punto caliente
