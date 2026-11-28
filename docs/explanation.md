@@ -18,11 +18,11 @@ $$\frac{T^{n+1}_{j,i}-T^n_{j,i}}{\Delta t}=\kappa\left[\frac{T^n_{j,i+1}-2T^n_{j
 
 Despejando:
 
-$$T^{n+1}_{j,i}=(1-2r_x-2r_y)T^n_{j,i}+r_x(T^n_{j,i-1}+T^n_{j,i+1})+r_y(T^n_{j-1,i}+T^n_{j+1,i}),$$
+$$T^{n+1}_{j,i}=T^n_{j,i}+r_x(T^n_{j,i+1}-2T^n_{j,i}+T^n_{j,i-1})+r_y(T^n_{j+1,i}-2T^n_{j,i}+T^n_{j-1,i}),$$
 
 con $r_x=\kappa\Delta t/\Delta x^2$ y $r_y=\kappa\Delta t/\Delta y^2$.
 
-El método FTCS es explícito: el valor nuevo depende solo del estado anterior. Es de primer orden temporal y segundo orden espacial para soluciones suficientemente suaves. La condición de estabilidad para difusividad positiva en una malla uniforme es $r_x+r_y\leq 1/2$. Se obtiene del factor de amplificación de Fourier $G=1-4r_x\sin^2(k_x\Delta x/2)-4r_y\sin^2(k_y\Delta y/2)$, al exigir $|G|\leq1$. Con $M=20$, $L=1$, $h=10^{-4}$, $\kappa=1$, los coeficientes son 0.04 y 0.04; su suma es 0.08, por lo que el método es estable.
+El método FTCS es explícito: el valor nuevo depende solo del estado anterior. Es de primer orden temporal y segundo orden espacial para soluciones suficientemente suaves. La condición de estabilidad para difusividad positiva en una malla uniforme es $r_x+r_y\leq 1/2$. Con $M=20$, $L=1$, $h=10^{-4}$, $\kappa=1$, los coeficientes son $r_x=0.04$ y $r_y=0.04$; su suma es 0.08, por lo que el método es estable.
 
 ## 3. Condiciones implementadas
 
